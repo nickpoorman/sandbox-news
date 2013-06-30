@@ -18,6 +18,7 @@ Please note that I did not use the HN algorithm. It's my opinion that there is a
 * MONGO_URI - mongoDB uri
 * EMAIL_USER - email account to send emails from
 * EMAIL_PASS - email password
+* COOKIE_SECRET - cookie signing key
 
 ##### Configure email sender
 

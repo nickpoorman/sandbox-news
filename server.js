@@ -127,7 +127,7 @@ app.use(express.compress());
     Signed cookies are available via req.signedCookies, and
     unsigned as req.cookies.
     */
-app.use(express.cookieParser(process.env.PORT || "secret-token-key"));
+app.use(express.cookieParser(process.env.COOKIE_SECRET || "secret-token-key"));
 app.use(express.bodyParser());
 app.use(expressValidator());
 app.use(express.methodOverride());

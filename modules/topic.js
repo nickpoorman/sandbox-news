@@ -9,6 +9,7 @@ var _ = require("underscore");
 var auth = require('./auth-middleware');
 var url = require('url');
 var moment = require('moment');
+var check = require('validator').check;
 
 //var User = require('../models/user');
 var Topic = require('../models/topic');
@@ -104,9 +105,19 @@ function validateTopic(req, res, next) {
     req.body.text = undefined;
   }
 
-  //if(!foundURL && foundText){
-  // do nothing here
-  //}
+  if(!foundURL && foundText){
+    // make sure the text box isn't just a url
+    var textIsUrl = true;
+    try {
+      check(req.body.text).isUrl();
+    } catch (e) {
+      textIsUrl = false;
+    }
+    if(textIsUrl){
+      req.body.url = req.body.text;
+      req.body.text = undefined;
+    }
+  }
 
   if (!foundURL && !foundText) {
     // make sure the text is there

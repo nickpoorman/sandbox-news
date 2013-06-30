@@ -19,14 +19,24 @@ block content
                 | )
         tr
           td(colspan='1')
-          td.subtext.pocket-inserted
+          td.subtext
             //- span 107 points
-            | by
+            | by 
             a(href='/user/' + user._id)= username
             | &nbsp;
             = elapsedTime
             | &nbsp;| 
             a(href='/topic/' + _id)= (numComments == 0 ? 'discuss' : numComments + ' comments')
+        if typeof text !== 'undefined' && typeof text !== 'null' && typeof text !== ''
+          tr(style='height: 2px;')
+          tr
+            td
+            td
+              - var splitText = text.split(/\n/g);
+              each st in splitText
+                if st.trim() !== ''
+                  p= st
+
         tr(style='height: 10px;')
         tr
           td

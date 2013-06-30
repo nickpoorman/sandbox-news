@@ -17,23 +17,26 @@ expressValidator.Validator.prototype.notUrl = function() {
 };
 
 expressValidator.Validator.prototype.notContainsUrl = function() {
-  var containsUrl = false;
+  var containsUrl = true;
   // loop through
   var spl = this.str.split(/\s+/);
   console.log("split");
   console.log(spl);
   for (var i = spl.length - 1; i >= 0; i--) {
+    containsUrl = true;
     try {
       check(spl[i]).isUrl();
     } catch (e) {
       if(typeof e !== 'undefined' || e.name === 'ValidatorError'){
-        containsUrl = true;
+        // this gets called if it's not a url
+        containsUrl = false;
       }
     }
+    if(containsUrl){
+      return this.error(this.msg);
+    }
   };
-  if(containsUrl){
-    this.error(this.msg);
-  }
+  
   return this;
 };
 

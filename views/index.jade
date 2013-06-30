@@ -27,7 +27,7 @@ block content
             td.subtext.pocket-inserted
               //- span 107 points
               | by 
-              a(href='/user/' + topic.user._id)= topic.username
+              a(href='/user/' + topic.creator._id)= topic.username
               | &nbsp;
               = topic.elapsedTime
               | &nbsp;| 

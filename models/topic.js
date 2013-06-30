@@ -14,7 +14,7 @@ var TopicSchema = new Schema({
   },
   name: String,
   // Register boats to divisions
-  user: {
+  creator: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },

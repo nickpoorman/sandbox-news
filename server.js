@@ -22,6 +22,7 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 
 // node-validator
+var expressValidatorExtend = require('./modules/express-validator-extend');
 var expressValidator = require('express-validator');
 
 // app config -------------------------------------------------------------------

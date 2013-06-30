@@ -21,12 +21,12 @@ app.set('view options', {
   doctype: 'html'
 });
 
-app.param('topic_id', function(req, res, next, id){
-  Topic.findById(id, function(err, topic){
-    if(err){
+app.param('topic_id', function(req, res, next, id) {
+  Topic.findById(id, function(err, topic) {
+    if (err) {
       return next(err);
     }
-    if(!topic){
+    if (!topic) {
       var err = new Error('not found');
       err.status = 404;
       return next(err);
@@ -49,7 +49,7 @@ app.get('/submit', auth.user, newTopic);
 /*
  * Create a topic.
  */
-app.post('/submit', auth.user, createTopic);
+app.post('/submit', auth.user, validateTopic, createTopic);
 
 /*
  * Show the topic's page.
@@ -58,23 +58,26 @@ app.get('/topic/:topic_id', showTopic);
 
 // -------- HELPERS ----------------
 
-function showTopics(req, res, next){
+function showTopics(req, res, next) {
   // get all the topics
-  Topic.find({}, function(err, topics){
+  Topic.find({}, function(err, topics) {
     // go through and attach a time to the topic
     for (var i = topics.length - 1; i >= 0; i--) {
       topics[i].elapsedTime = moment(topics[i].createdAt).fromNow();
     };
-    return res.render('index', {topics: topics, counter: 1});
+    return res.render('index', {
+      topics: topics,
+      counter: 1
+    });
   });
 }
 
-function newTopic(req, res, next){
+function newTopic(req, res, next) {
   return res.render('submit');
 }
 
-function validateTopic(req, res, next){
-    var params = [
+function validateTopic(req, res, next) {
+  var params = [
       'title',
       'url',
       'text'
@@ -86,6 +89,8 @@ function validateTopic(req, res, next){
 
   // going to do the validations here
   req.assert('title', 'Title required').notEmpty();
+  req.assert('title', 'Please use a descriptive title').notUrl()
+  req.assert('title', 'Please do not use a url here').notContainsUrl();
 
   // either url or text has to have someting in it
   // make sure text isn't just whitespace
@@ -93,19 +98,19 @@ function validateTopic(req, res, next){
   var foundText = (req.body.text && !req.body.text.match(/^[\s\t\r\n]*$/));
 
   // if there is a url then we don't care about the text
-  if(foundURL){
+  if (foundURL) {
     // if there is something there then make sure it's a url
     req.assert('url', 'Valid url required').isUrl();
     req.body.text = undefined;
   }
 
   //if(!foundURL && foundText){
-    // do nothing here
+  // do nothing here
   //}
 
-  if(!foundURL && !foundText){
+  if (!foundURL && !foundText) {
     // make sure the text is there
-    req.assert('url', 'Must fill in either url or text').isURL();
+    req.assert('url', 'Must fill in either url or text').isUrl();
     req.assert('text', 'Must fill in either url or text').notEmpty();
   }
 
@@ -122,26 +127,26 @@ function validateTopic(req, res, next){
   return next();
 }
 
-function createTopic(req, res, next){
+function createTopic(req, res, next) {
   var hostname = undefined;
-  if(req.body.url){
-    if(!req.body.url.match(/^http:\/\//g) && !req.body.url.match(/^https:\/\//g)){
+  if (req.body.url) {
+    if (!req.body.url.match(/^http:\/\//g) && !req.body.url.match(/^https:\/\//g)) {
       req.body.url = 'http://' + req.body.url;
     }
-    hostname = url.parse(req.body.url).hostname.replace(/^www\./g,"");
+    hostname = url.parse(req.body.url).hostname.replace(/^www\./g, "");
   }
   var topic = new Topic({
     title: req.body.title,
     url: req.body.url,
     text: req.body.text,
-    user: req.user,
+    creator: req.user,
     username: req.user.name,
     hostname: hostname
   });
 
   topic.voteup.push(req.user);
 
-  topic.save(function(err, newTopic){
+  topic.save(function(err, newTopic) {
     if (err) {
       return next(err);
     }
@@ -149,8 +154,11 @@ function createTopic(req, res, next){
   });
 }
 
-function showTopic(req, res, next){
+function showTopic(req, res, next) {
   var topic = req.topic;
+  if (!topic) {
+    next();
+  }
   topic.elapsedTime = moment(topic.createdAt).fromNow();
   return res.render('topic', topic);
 }

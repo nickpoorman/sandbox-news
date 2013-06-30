@@ -12,10 +12,10 @@ block content
                 img(src='/assets/img/arrow-down.png', border='0', vspace='3', hspace='2')
           td.title
             a(href=(typeof url !== 'undefined' ? url : '/t/' + _id))= title
-            if typeof topic.hostname !== 'undefined' && typeof topic.hostname !== 'null' && typeof topic.hostname !== ''
+            if typeof hostname !== 'undefined' && typeof hostname !== 'null' && typeof hostname !== ''
               span.comhead 
                 | &nbsp;(
-                = topic.hostname
+                = hostname
                 | )
         tr
           td(colspan='1')
@@ -38,11 +38,10 @@ block content
               br
               br
               span.subtext
-                | If you haven't already, would you mind reading about SN's
+                | If you haven't already, would you mind reading about SN's 
                 a(href='/newswelcome.html')
                   u
-                    | approach
-                    | to comments
+                    | approach to comments
                 | ?
               br
               br

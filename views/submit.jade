@@ -8,16 +8,20 @@ block content
           td title
           td
             input(type='text', name='title', value=(typeof params !== 'undefined' ? params['title'] : ''), size='50')
-          td
-            if typeof errors !== 'undefined' && typeof errors['title'] !== 'undefined'
-              = errors['title'].msg
+            if typeof errors !== 'undefined'
+              for error in errors
+                if error.param === 'title'
+                  | &nbsp;
+                  = error.msg
         tr
           td url
           td
             input(type='text', name='url', value=(typeof params !== 'undefined' ? params['url'] : ''), size='50')
-          td
-            if typeof errors !== 'undefined' && typeof errors['url'] !== 'undefined'
-              = errors['title'].msg
+            if typeof errors !== 'undefined'
+              for error in errors
+                if error.param === 'url'
+                  | &nbsp;
+                  = error.msg
         tr
           td
           td
@@ -26,9 +30,11 @@ block content
           td text
           td
             textarea(name='text', rows='4', cols='50', value=(typeof params !== 'undefined' ? params['text'] : ''))
-          td
-            if typeof errors !== 'undefined' && typeof errors['text'] !== 'undefined'
-              = errors['text'].msg
+            if typeof errors !== 'undefined'
+              for error in errors
+                if error.param === 'text'
+                  | &nbsp;
+                  = error.msg
         tr
           td
           td

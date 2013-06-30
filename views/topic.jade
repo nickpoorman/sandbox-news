@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  table(border='0')
+    tbody
+        tr
+          td
+            center
+              a(onclick='return vote(this)', href='/t/' + _id + '/u')
+                img(src='/assets/img/arrow-up.png', border='0', vspace='3', hspace='2')
+              a(onclick='return vote(this)', href='/t/' + _id + '/d')
+                img(src='/assets/img/arrow-down.png', border='0', vspace='3', hspace='2')
+          td.title
+            a(href=(typeof url !== 'undefined' ? url : '/t/' + _id))= title
+            if typeof topic.hostname !== 'undefined' && typeof topic.hostname !== 'null' && typeof topic.hostname !== ''
+              span.comhead 
+                | &nbsp;(
+                = topic.hostname
+                | )
+        tr
+          td(colspan='1')
+          td.subtext.pocket-inserted
+            //- span 107 points
+            | by
+            a(href='/user/' + user._id)= username
+            | &nbsp;
+            = elapsedTime
+            | &nbsp;| 
+            a(href='/topic/' + _id)= (numComments == 0 ? 'discuss' : numComments + ' comments')
+        tr(style='height: 10px;')
+        tr
+          td
+          td
+            form(method='post', action='/r')
+              //- TODO: csrf
+              //- input(type='hidden', name='', value='')
+              textarea(name='text', rows='6', cols='60')
+              br
+              br
+              span.subtext
+                | If you haven't already, would you mind reading about SN's
+                a(href='/newswelcome.html')
+                  u
+                    | approach
+                    | to comments
+                | ?
+              br
+              br
+              input(type='submit', value='add comment')

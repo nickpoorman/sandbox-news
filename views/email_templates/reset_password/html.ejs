@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>New Signup</title>
+</head>
+<body>
+<p> <span style="color: rgb(17, 17, 17); text-align: justify; "><img alt="SN logo" height="73px" src="<%= logoUrl %>" /></span> </p>
+<p>Hello <%= user.name %>,</p>
+<p>There was recently a request to change the password on your account.</p>
+<p>If you requested this password change, please set a new password by following the link below:</p>
+<p><a href="<%= resetPasswordUrl %>?token=<%= user.passwordResetToken %>&email=<%= user.email %>"><%= resetPasswordUrl %>?token=<%= user.passwordResetToken %>&email=<%= user.email %></a></p>
+<p>If you don't want to change your password, just ignore this message.</p>
+<p>If you have any questions, please visit <a href="<%= supportUrl %>"><%= supportUrl %></a>.</p>
+
+Cheers,<br>
+Sandbox News<br>
+<br>
+
+<p>
+	<font size="1">
+    	Didn't request your password to be reset? Please <a href="mailto:support+signup@sn.com">let us know.</a> This message is intended for <%= user.email %>.
+    </font>
+</p>
+
+</body>
+</html>

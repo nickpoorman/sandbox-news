@@ -1,0 +1,48 @@
+mixin field(type, name, placeholder, required)
+  if typeof params !== 'undefined'
+    value = params[name]
+  cg = 'control-group'
+  if typeof errors !== 'undefined'
+    for error in errors
+      if error.param === name
+        - cg = cg + ' error'
+  .field(class=cg)
+    .controls
+      input(type=type, name=name, value=value, placeholder=placeholder, required=(required ? '' : null))
+      if typeof errors !== 'undefined'
+        .help-block
+          for error in errors
+            if error.param === name
+              = error.msg
+
+mixin auth-field(type, name, placeholder)
+  if typeof params !== 'undefined'
+    value = params[name]
+  cg = 'control-group'
+  if typeof errors !== 'undefined'
+    for error in errors
+      if error.param === name
+        - cg = cg + ' error'
+  .field(class=cg)
+    .controls
+      input.input-block(type=type, name=name, value=value, placeholder=placeholder)
+      if typeof errors !== 'undefined'
+        .help-block
+          for error in errors
+            if error.param === name
+              = error.msg
+
+mixin oldSchoolFieldAndLabel(type, name, placeholder, required)
+  if typeof params !== 'undefined'
+    value = params[name]
+  tr
+    td= placeholder
+      | :
+    td
+      input(type=type, name=name, value=value, size='20', required=(required ? '' : null), step=(type === 'number' ? "any" : false))
+    td
+      if typeof errors !== 'undefined'
+        .help-block
+          for error in errors
+            if error.param === name
+              = error.msg

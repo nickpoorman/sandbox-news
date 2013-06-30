@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  form(method='post', action='/submit')    
+    table(border='0')
+      tbody
+        tr
+          td title
+          td
+            input(type='text', name='title', value=(typeof params !== 'undefined' ? params['title'] : ''), size='50')
+          td
+            if typeof errors !== 'undefined' && typeof errors['title'] !== 'undefined'
+              = errors['title'].msg
+        tr
+          td url
+          td
+            input(type='text', name='url', value=(typeof params !== 'undefined' ? params['url'] : ''), size='50')
+          td
+            if typeof errors !== 'undefined' && typeof errors['url'] !== 'undefined'
+              = errors['title'].msg
+        tr
+          td
+          td
+            b or
+        tr
+          td text
+          td
+            textarea(name='text', rows='4', cols='50', value=(typeof params !== 'undefined' ? params['text'] : ''))
+          td
+            if typeof errors !== 'undefined' && typeof errors['text'] !== 'undefined'
+              = errors['text'].msg
+        tr
+          td
+          td
+            input(type='submit', value='submit')
+        tr(style='height: 20px;')
+        tr
+          td
+          td
+            | Leave url blank to submit a question for discussion. If there is
+            | no url, the text (if any) will appear at the top of the comments
+            | page. If there is a url, the text will be ignored.

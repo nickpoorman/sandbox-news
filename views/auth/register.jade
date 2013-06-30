@@ -1,0 +1,20 @@
+include ../mixins/form-helpers
+
+html
+  head
+  body
+    b
+      block alert
+    br
+    b Create Account
+    br
+    br
+    form(action="/signup", method="post")
+      table(border='0')
+        tbody
+          mixin oldSchoolFieldAndLabel('text', 'name', 'Your name', true)
+          mixin oldSchoolFieldAndLabel('text', 'company', 'Your organization / company name', false)
+          mixin oldSchoolFieldAndLabel('email', 'email', 'Your email', true)
+          mixin oldSchoolFieldAndLabel('password', 'password', 'Create a password', true)
+      br
+      input(type="submit", value="Sign up for free")

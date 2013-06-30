@@ -1,0 +1,16 @@
+//- navbar
+.main-nav
+  .navbar.navbar-innder.navbar-static-top
+    .container
+      a.btn.btn-navbar(data-toggle="collapse", data-target=".nav-collapse")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.logo(href="/")
+        img(src="/assets/img/logo-trimmed.jpg")
+      .nav-collapse.collapse
+        ul.nav
+          li(class=(nav === '' ? 'active' : ''))
+            a(href="/") Home
+
+//- end navbar

@@ -1,0 +1,26 @@
+head
+
+  title Sandbox News
+
+  include scripts
+  //- including .html, .css, etc works
+  //- include style.less
+  if 'production' == settings.env
+    //- - console.log("In view production env");
+    //- link(href="/assets/css/compiled.css", rel="stylesheet")
+    link(href="/assets/less/news.css", rel="stylesheet")
+
+  if 'development' == settings.env
+    //- - console.log("In view development env");
+    //- link(rel='stylesheet/less', type='text/css', href='/assets/css/bootstrap.less')
+    link(rel='stylesheet/less', type='text/css', href='/assets/less/news.less')
+
+  if 'production' == settings.env
+    //- - console.log("In view production env - responsive");
+    //- link(href="/assets/css/compiled-responsive.css", rel="stylesheet")
+
+  if 'development' == settings.env
+    //- - console.log("In view development env - responsive");
+    //- link(rel='stylesheet/less', type='text/css', href='/assets/css/responsive.less')
+
+  link(rel="shortcut icon", href="/assets/ico/favicon.ico")

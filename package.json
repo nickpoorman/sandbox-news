@@ -1,0 +1,38 @@
+{
+  "name": "Sandbox-News",
+  "description": "Syracuse Student Sandbox News App",
+  "url": "",
+  "author": "Nick Poorman <nick@regattable.com>",
+  "contributors": [],
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~3.2.6",
+    "redis": "~0.8.3",
+    "connect": "~2.7.11",
+    "connect-redis": "~1.4.5",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6",
+    "bcrypt": "~0.7.6",
+    "mongoose": "~3.6.11",
+    "connect-flash": "~0.1.1",
+    "express-validator": "~0.6.0",
+    "nodemailer": "~0.4.4",
+    "email-templates": "~0.1.0",
+    "moment": "~2.0.0",
+    "validator": "~1.2.0",
+    "async": "~0.2.9",
+    "jade": "~0.31.2",
+    "underscore": "~1.4.4"
+  },
+  "scripts": {
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "0.10.12"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  }
+}

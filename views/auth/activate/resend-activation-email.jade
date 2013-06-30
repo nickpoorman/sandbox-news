@@ -1,0 +1,12 @@
+extends ../../layout
+include ../../mixins/form-helpers
+
+block content
+  block alert
+  form.resend-activation.pull-right(action="/auth/resend-activation-email", method="post")
+    mixin field('email', 'email', 'Your email', true)
+    input(type="submit", value="Send", class="btn btn-primary")
+  h1
+    | Find Your Account
+  h2
+    | Enter your email address to have the activation resent. You may need to check your spam folder or unblock no-reply@sn.com.

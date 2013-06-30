@@ -1,0 +1,10 @@
+extends ../layout
+
+block error
+  h1
+    | 404
+  h2
+    | You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.
+  ul
+    li
+      a(href="http://www.sn.com") Go to the SN homepage

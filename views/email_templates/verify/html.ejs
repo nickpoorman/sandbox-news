@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>New Signup</title>
+</head>
+<body>
+<p> <span style="color: rgb(17, 17, 17); text-align: justify; "><img alt="SN logo" height="73px" src="<%= logoUrl %>" /></span> </p>
+<p>Hello <%= user.name %>,</p>
+<p>You have entered <%= user.email %> as the contact email address for your sandbox news account.</p>
+<p>To verify that the email address belongs to you, simply click this link or paste it into your browser:</p>
+<p><a href="<%= registerConfirmUrl %><%= user.confirmationToken %>"><%= registerConfirmUrl %><%= user.confirmationToken %></a></p>
+
+<p> Thanks for signing up to Sandbox News. You can do lots of cool things here, all for free. If you have any questions, please visit <a href="<%= supportUrl %>"><%= supportUrl %></a>.</p>
+
+Cheers,<br>
+Sandbox News<br>
+<br>
+
+<p>
+	<font size="1">
+    	Didn't sign up for Sandbox News? Please <a href="mailto:support+signup@sn.com">let us know.</a> This message is intended for <%= user.email %>.
+    </font>
+</p>
+
+</body>
+</html>

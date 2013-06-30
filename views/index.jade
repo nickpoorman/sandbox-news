@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  each topic in topics
+    table(border='0', cellpadding='0', cellspacing='0')
+      tbody
+        tr
+          td.title(align='right', valign='top')= (counter++)
+            | .
+            td
+              center
+                a(href='/t/' + topic._id + '/u')
+                  img(src='/assets/img/arrow-up.png', border='0', vspace='3', hspace='2')
+                | &nbsp;
+                a(href='/t/' + topic._id + '/d')
+                  img(src='/assets/img/arrow-down.png', border='0', vspace='3', hspace='2')
+                | &nbsp;
+            td.title
+              a(href=(typeof topic.url !== 'undefined' ? topic.url : '/t/' + topic.id))= topic.title
+              if typeof topic.hostname !== 'undefined' && typeof topic.hostname !== 'null' && typeof topic.hostname !== ''
+                span.comhead 
+                  | &nbsp;(
+                  = topic.hostname
+                  | )
+        tr
+          td(colspan='2')
+            td.subtext.pocket-inserted
+              //- span 107 points
+              | by 
+              a(href='/user/' + topic.user._id)= topic.username
+              | &nbsp;
+              = topic.elapsedTime
+              | &nbsp;| 
+              a(href='/topic/' + topic._id)= (topic.numComments == 0 ? 'discuss' : topic.numComments + ' comments')
+        tr(style='height: 5px;')

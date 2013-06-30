@@ -1,0 +1,45 @@
+html
+  head
+    include includes/head
+  body
+    center
+      table(border='0', cellpadding='0', cellspacing='0', width='85%', bgcolor='#f6f6ef')
+        tbody
+          tr
+            td(bgcolor='#f47321')
+              table(border='0', cellpadding='0', cellspacing='0', width='100%', style='padding: 2px;')
+                tbody
+                  tr
+                    td(style='width: 18px; padding-right: 4px;')
+                      a(href='http://news.sn.com')
+                        img(src='/assets/img/logo.png', width='18', height='18', style='border: 1px #ffffff solid;')
+                    td(style='line-height: 12pt; height: 10px;')
+                      span.pagetop
+                        b
+                          a(href='news') Hacker News
+                        img(src='/assets/img/s.gif', height='1', width='10')
+                        a(href='/newest') new 
+                        | |
+                        a(href='/newcomments') &nbsp;comments 
+                        | |
+                        a(href='/ask') &nbsp;ask 
+                        | |
+                        a(href='/jobs') &nbsp;jobs 
+                        | |
+                        a(href='/submit') &nbsp;submit 
+                    td(style='text-align: right; padding-right: 4px;')
+                      span.pagetop
+                        if typeof user !== "undefined"
+                          a(href='/user/' + user.id)
+                          font(color='#3c963c')= user.name
+                          | &nbsp;|&nbsp;
+                          a(href='/logout') logout
+                        else
+                          a(href='/login') login
+          tr(style='height: 10px;')
+          tr
+            td
+              block content
+              block error
+          //- include includes/foot
+  include includes/foot-scripts
